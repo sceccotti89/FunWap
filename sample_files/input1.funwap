@@ -1,0 +1,68 @@
+//	Distributed Fibonacci	Function
+fun bib	(n	int)	int {
+	var a,	b	int;
+	var u	url;
+	u =	readln();
+	//We	do	not	wait	for	bib(n-1)
+	a	=	async{return bib( n-1-0 );};
+	//	...	because	we	perform	bib(n-2)	in		a	remote	site
+	b =	dasync{u,	return bib(n-2); };
+	//	but	here	we	wait	....
+	return a+	b;
+}
+
+//	Asynchronous	Fibonacci	Function
+fun fib	(n	int)	int {
+	var a,	b	int;
+
+	//We	do	not	wait	for	fib(n-1)
+
+	a	=	async{ return fib(n - 1); };
+
+	//	...	because	we	perform	fib(n-2)	in		parallel
+	b	=	async{return fib(n - 2);};
+
+	//	but	here	we	wait	....
+	return a+	b;
+}
+
+fun outside_adder()	fun(int)	int {
+	//	Closure
+	var sum	int =	10;
+	//	Anonymous	functions	supported,	without	the	ID
+	return fun(x	int)	int {
+			sum	+=	x;
+			return sum;
+	};	}
+
+fun main()	{
+	//	single-line	comments
+	//	a	is	0,	so	is	b
+		
+	var a	int	=	0;
+	var b	int	=	0;
+	var i int;
+
+	//	a_eq_b	is	TRUE
+	var a_eq_b	bool	=	a	==	b;
+	for i	=	0;	i	<	32;	i++	{
+		a	+=	i;	}	
+	if a_eq_b	&&	a	==	0	{
+		println("a	is	0,	so	is	b");
+	}	else {
+		println("at	least	one	of	a	b	is	not	zero");
+	}	
+
+	var adder	fun =	outside_adder();	//Using	closure	properly	
+	var another_adder	fun ;
+	var yet_another_adder	fun;
+	println(adder(5));	//	15
+	var ff int = -adder( 5 );
+	//First	class	variable	
+	another_adder	=	adder ;
+	println(another_adder(60));	//	75	
+	yet_another_adder	=	outside_adder();	
+	//	A	differen	closure
+	println(yet_another_adder(60)); //	70
+	println(adder(60)); //	135	
+}

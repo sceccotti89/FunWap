@@ -1,0 +1,263 @@
+
+// global variables
+var aa int = 0;
+var bb fun = fun( b fun( int ) int, v bool ) int {
+		var a int = b( 0 );
+		return 0;
+	};
+
+// closure as parameter
+fun foo( b fun( int ), v int ) string
+{
+	aa = 0;
+	//bb = b;
+
+	return "";
+}
+
+// closure inside closure
+fun foo( b fun( fun( int ) int, bool ) int, x int )
+{
+	var a int = b( fun( i int ) int {
+				//var v int = b( 0 );
+				return 0;
+			}, true );
+
+	//bb = b;
+}
+
+fun test() string
+{
+	var p fun = fun( b fun( int ) int, v bool ) int {
+		var a int = b( 0 );
+		return 0;
+	};
+
+	foo( fun( b fun( int ) int, v bool ) int {
+			var a int = b( 0 );
+			return 0;
+		}, 0 );
+
+	p = fun( b fun( int ) int, v bool ) int {
+		//var a int = b( 0 );
+		return 0;
+	};
+
+	return "";
+}
+
+fun vvv ( n int, i int )
+{
+	
+}
+
+fun vvv ( n float, i int )
+{
+	
+}
+
+// asynchronous Fibonacci function
+fun fib ( n int ) int
+{
+	var a, b int = 0, 0;
+	var ff float = 033.3f;
+	var c int = (int) 0 + 0 + 3;
+	var d int = c += 4;
+	var u url;
+	var pp url = readln();
+	var v bool = 3 + 3 + 3 >= 4 + 5;
+
+	// a block
+	{
+		a = 0;
+		//return 0;
+	}
+
+	var p fun = fun( x url ) int {
+		a = 0;
+		//a += x;
+		return a;
+	};
+
+	u = readln();
+
+	//p = p - 1;
+	c -= a;
+
+	if n == 0 || n == 1 {
+		return n;
+	}
+
+	// we do not wait for fib( n - 1 )
+	a = async{
+			var f int = a + 1;
+			return fib( n - 1 );
+		};
+
+	async{
+			var f int = a + 1;
+			var z int = 0;
+			f = fib( c );
+		};
+
+	// ... because we perform fib( n - 2 ) in parallel
+	//b = async{ return fib( n - 2 ); };
+
+	// perform fib( n - 2 ) in a remote site
+	b = dasync{
+				u,
+				var m int = n + 1;
+				return fib( n - 2 );
+			  };
+
+	a += c += 3;
+
+	// but here we wait ....
+	return a + b;
+}
+
+// recursive function
+fun fact ( n int ) int
+{
+	if n == 0 || n == 1 {
+		return 1;
+	}
+	else {
+		return n * fact( n - 1 );
+	}
+}
+
+/*fun fib ( n int ) int
+{
+	var a, b int = 0;
+	//var u url;
+	var u string;
+
+	u = readln();
+
+	// we do not wait for fib( n - 1 )
+	a = async{ return fib( n - 1 ); };
+
+	// ... because we perform fib( n - 2 ) in a remote site
+	b = dasync{ u, return fib( n - 2 ); };
+
+	// but here we wait ....
+	return a + b;
+}*/
+
+// fun ID (PARAMS) RETURN_TYPE
+fun outside_adder() fun( int ) int
+{
+	// closure
+	var sum int = 10;
+	var funct fun;
+
+	funct = fun( x int ) int {
+		sum += x;
+		return sum;
+	};
+
+	return funct;
+
+	// anonymous functions supported, without the ID
+	return fun( x int ) int {
+		sum += x;
+		return sum;
+	};
+}
+
+// multiple return closure
+fun outside_adder2() fun( int ) fun( float )
+{
+	return fun( x int ) fun ( float ) {
+		return fun ( a float ) {
+			return;
+		};
+	};
+}
+
+fun pippo()
+{
+	/*var a fun = outside_adder2()( 0 );
+	a( 0f );
+	var c fun = outside_adder2()( 0 );
+	c = outside_adder2()( 0 )( 0.0f );*/
+}
+
+fun act() fun( int )
+{
+    var sum int = 10;
+
+    return fun( x int ) {
+        sum += x;
+    };
+}
+
+fun main()
+{
+	/*
+	 * an imperative sequence of statements, including
+	 * declarations, assignments, conditional statements and
+	 * function calls. Multi-line comments are allowed,
+	 * so are single-line comments.
+	*/
+
+	// a is 0, so is b
+	var a int = 0;
+	var b float = 0;
+	var d double = (int) 0;
+	var ss string = "";
+	var f int = a += 3;
+
+	var ff bool = (a == b);
+
+	{
+		var x int = a;
+
+		{
+			x++;
+		}
+	}
+	//x++;
+
+	// a_eq_b is TRUE
+	var a_eq_b bool = a == b;
+
+	var i int;
+	for i = 0; i < 32; i++ {
+		var y int = 5;
+		a += i;
+		y = a + 1;
+	}
+	//y++;
+
+	// while loop
+	i = 0;
+	while i != 100 {
+		var v int = 3 * 5;
+		i++;
+	}
+
+	var adder fun = outside_adder(); // using closure properly
+	println( adder( 5 ) ); // 15
+
+	if !a_eq_b && a == 0 {
+		println( "a is 0, so is b" );
+		a++;
+	}
+	else {
+		println( "at least one of a and b is not zero" );
+	}
+
+	// first class variable	
+	var another_adder fun = adder;
+	println( another_adder( 60 ) ); // 75
+
+	var yet_another_adder fun = outside_adder();
+	// a differen closure
+	println( yet_another_adder( 60 ) ); // 70
+	println( adder( 60 ) ); // 135
+
+	var action fun = act();
+	action( a++ );
+}
