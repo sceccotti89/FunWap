@@ -7,7 +7,7 @@ using System;
 using Funwap.engine;
 using Funwap.parser;
 
-namespace Funwap.main
+namespace Funwap.test
 {
     public class Launcher
     {
@@ -25,6 +25,6 @@ namespace Funwap.main
             // Compile the code.
             Compiler c = new Compiler( file_path );
             c.compile( p.parse() );
-	}
+	    }
     }
 }
