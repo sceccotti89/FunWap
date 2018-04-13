@@ -24,10 +24,10 @@ namespace Funwap.engine
 
         /* the regular expressions */
         /*private static final String REGEX[] = {
-                                                "[A-z][0|A-z]*",		// IDENTIFIER
-                                                "[0-9]+",				// INTEGER
-                                                "[0-9]*(\\.[0-9]*f)",	// FLOAT
-                                                "[0-9]*\\.[0-9]*"		// DOUBLE
+                                                "[A-z][0|A-z]*",        // IDENTIFIER
+                                                "[0-9]+",                // INTEGER
+                                                "[0-9]*(\\.[0-9]*f)",    // FLOAT
+                                                "[0-9]*\\.[0-9]*"        // DOUBLE
                                               };*/
 
         public Tokenizer(String file_path)

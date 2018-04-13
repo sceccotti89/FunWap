@@ -3,10 +3,10 @@ PROGRAM ::= DECLARATION_LIST FUN_LIST
 
 DECLARATION_LIST ::= var IDE DECLARATION2 DECLARATION_LIST | ε
 DECLARATION2 ::= , IDE_LIST TYPE1; |
-				 TYPE1 = EXPR;
+                 TYPE1 = EXPR;
 
-FUN_LIST ::= FUN FUN_LIST	|
-			 ε
+FUN_LIST ::= FUN FUN_LIST    |
+             ε
 
 FUN ::= fun IDE ( PARAM_LIST ) TYPE2 BLOCK
 
@@ -29,16 +29,16 @@ BLOCK ::= { STATEMENT_LIST }
 
 STATEMENT_LIST ::= STATEMENT STATEMENT_LIST | ε
 
-STATEMENT ::= DECLARATION_LIST									|
-			  ASSIGNMENT;										|
-			  for ASSIGNMENT; FOR_CONDITION; ASSIGNMENT BLOCK	|
-			  while EXP BLOCK									|
-			  if EXPR BLOCK else BLOCK							|
-			  BLOCK												|
-			  IDE( FUN_ARGS ) CALL2; 							|
-			  async{ STATEMENT_LIST } 							|
-			  dasync{ IDE, STATEMENT_LIST }						|
-			  return FUN_RET;
+STATEMENT ::= DECLARATION_LIST                                    |
+              ASSIGNMENT;                                        |
+              for ASSIGNMENT; FOR_CONDITION; ASSIGNMENT BLOCK    |
+              while EXP BLOCK                                    |
+              if EXPR BLOCK else BLOCK                            |
+              BLOCK                                                |
+              IDE( FUN_ARGS ) CALL2;                             |
+              async{ STATEMENT_LIST }                             |
+              dasync{ IDE, STATEMENT_LIST }                        |
+              return FUN_RET;
 
 // multiple invocations
 CALL2 ::= ( FUN_ARGS ) CALL2 | ε
@@ -47,63 +47,63 @@ FOR_CONDITION ::= EXPR | ε
 
 ASSIGNMENT ::= IDE RIGHT_ASSIGNMENT; | ε
 
-RIGHT_ASSIGNMENT ::= ++						|
-					 --						|
-					 =  ASSIGNMENT_EQUALS	|
-					 += EXPR				|
-					 -= EXPR				|
-					 /= EXPR				|
-					 *= EXPR
+RIGHT_ASSIGNMENT ::= ++                        |
+                     --                        |
+                     =  ASSIGNMENT_EQUALS    |
+                     += EXPR                |
+                     -= EXPR                |
+                     /= EXPR                |
+                     *= EXPR
 
-ASSIGNMENT_EQUALS ::= CLOSURE						|
-					  async{ STATEMENT_LIST } 		|
-					  dasync{ IDE, STATEMENT_LIST }	|
-					  EXPR
+ASSIGNMENT_EQUALS ::= CLOSURE                        |
+                      async{ STATEMENT_LIST }         |
+                      dasync{ IDE, STATEMENT_LIST }    |
+                      EXPR
 
-FUN_RET ::= CLOSURE	|
-			EXPR	|
-			ε
+FUN_RET ::= CLOSURE    |
+            EXPR    |
+            ε
 
 EXPR ::= E1 E3
 
 E1 ::= EXPRESSION E2
 
 E2 ::= != E1 |
-	   == E1 |
-	   <  E1 |
-	   <= E1 |
-	   >  E1 |
-	   >= E1 |
-	   ε
+       == E1 |
+       <  E1 |
+       <= E1 |
+       >  E1 |
+       >= E1 |
+       ε
 
 E3 ::= && EXPR |
-	   || EXPR |
-	   ε
+       || EXPR |
+       ε
 
-EXPRESSION ::= (EXPR) RIGHT_EXPR 				|
-			   (TYPE2) EXPRESSION				| // cast
-			   IDE( FUN_ARGS )CALL2 RIGHT_EXPR	|
-			   IDE RIGHT_EXPR					|
-			   NUM RIGHT_EXPR					|
-			   true								|
-			   false							|
-			   STRING
+EXPRESSION ::= (EXPR) RIGHT_EXPR                 |
+               (TYPE2) EXPRESSION                | // cast
+               IDE( FUN_ARGS )CALL2 RIGHT_EXPR    |
+               IDE RIGHT_EXPR                    |
+               NUM RIGHT_EXPR                    |
+               true                                |
+               false                            |
+               STRING
 
-RIGHT_EXPR ::= ++				|
-			   --				|
-			   +  EXPRESSION	|
-   			   += EXPRESSION	|
-			   -  EXPRESSION	|
-			   -= EXPRESSION	|
-			   /  EXPRESSION	|
-			   /= EXPRESSION	|
-			   *  EXPRESSION	|
-			   *= EXPRESSION	|
-			   ε
+RIGHT_EXPR ::= ++                |
+               --                |
+               +  EXPRESSION    |
+                  += EXPRESSION    |
+               -  EXPRESSION    |
+               -= EXPRESSION    |
+               /  EXPRESSION    |
+               /= EXPRESSION    |
+               *  EXPRESSION    |
+               *= EXPRESSION    |
+               ε
 
-FUN_ARGS  ::= EXPR FUN_ARGS2	|
-			  CLOSURE FUN_ARGS2	|
-			  ε
+FUN_ARGS  ::= EXPR FUN_ARGS2    |
+              CLOSURE FUN_ARGS2    |
+              ε
 FUN_ARGS2 ::= , FUN_ARGS | ε
 
 NUM ::= INT | FLOAT | DOUBLE

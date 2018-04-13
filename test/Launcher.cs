@@ -25,6 +25,6 @@ namespace Funwap.test
             // Compile the code.
             Compiler c = new Compiler( file_path );
             c.compile( p.parse() );
-	    }
+        }
     }
 }
