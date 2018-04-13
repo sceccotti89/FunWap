@@ -4,7 +4,7 @@ This is a toy project used to implement a C# parser for the FunW@p language.
 You can find the grammar structure in the Grammar.txt file.
 
 The parser accepts only LL1 grammars, compiling the source code into a C# equivalent code,
-including lambda functions. The test the program just use a class like this:
+including lambda functions. To test the program just run a code like this:
 
 ```bash
 Parser p = new Parser( new Tokenizer( file ) );
