@@ -1,0 +1,125 @@
+
+PROGRAM ::= DECLARATION_LIST FUN_LIST
+
+DECLARATION_LIST ::= var IDE DECLARATION2 DECLARATION_LIST | ε
+DECLARATION2 ::= , IDE_LIST TYPE1; |
+				 TYPE1 = EXPR;
+
+FUN_LIST ::= FUN FUN_LIST	|
+			 ε
+
+FUN ::= fun IDE ( PARAM_LIST ) TYPE2 BLOCK
+
+IDE_LIST ::= IDE IDE_LIST2 | ε
+IDE_LIST2 ::= , IDE IDE_LIST | ε
+
+IDE ::= CHAR IDE2
+IDE2 ::= CHAR IDE2 | NUM IDE2 | ε
+
+PARAM_LIST ::= IDE PARAM_LIST2 | ε
+PARAM_LIST2 ::= TYPE2 | TYPE2, PARAM_LIST
+
+TYPE1 ::= int | float | double | bool | char | string | url | fun
+
+TYPE2 ::= int | float | double | bool | char | string | url | fun ( TYPE2 ) TYPE2 | ε
+
+CLOSURE ::= fun ( PARAM_LIST ) TYPE2 BLOCK
+
+BLOCK ::= { STATEMENT_LIST }
+
+STATEMENT_LIST ::= STATEMENT STATEMENT_LIST | ε
+
+STATEMENT ::= DECLARATION_LIST									|
+			  ASSIGNMENT;										|
+			  for ASSIGNMENT; FOR_CONDITION; ASSIGNMENT BLOCK	|
+			  while EXP BLOCK									|
+			  if EXPR BLOCK else BLOCK							|
+			  BLOCK												|
+			  IDE( FUN_ARGS ) CALL2; 							|
+			  async{ STATEMENT_LIST } 							|
+			  dasync{ IDE, STATEMENT_LIST }						|
+			  return FUN_RET;
+
+// multiple invocations
+CALL2 ::= ( FUN_ARGS ) CALL2 | ε
+
+FOR_CONDITION ::= EXPR | ε
+
+ASSIGNMENT ::= IDE RIGHT_ASSIGNMENT; | ε
+
+RIGHT_ASSIGNMENT ::= ++						|
+					 --						|
+					 =  ASSIGNMENT_EQUALS	|
+					 += EXPR				|
+					 -= EXPR				|
+					 /= EXPR				|
+					 *= EXPR
+
+ASSIGNMENT_EQUALS ::= CLOSURE						|
+					  async{ STATEMENT_LIST } 		|
+					  dasync{ IDE, STATEMENT_LIST }	|
+					  EXPR
+
+FUN_RET ::= CLOSURE	|
+			EXPR	|
+			ε
+
+EXPR ::= E1 E3
+
+E1 ::= EXPRESSION E2
+
+E2 ::= != E1 |
+	   == E1 |
+	   <  E1 |
+	   <= E1 |
+	   >  E1 |
+	   >= E1 |
+	   ε
+
+E3 ::= && EXPR |
+	   || EXPR |
+	   ε
+
+EXPRESSION ::= (EXPR) RIGHT_EXPR 				|
+			   (TYPE2) EXPRESSION				| // cast
+			   IDE( FUN_ARGS )CALL2 RIGHT_EXPR	|
+			   IDE RIGHT_EXPR					|
+			   NUM RIGHT_EXPR					|
+			   true								|
+			   false							|
+			   STRING
+
+RIGHT_EXPR ::= ++				|
+			   --				|
+			   +  EXPRESSION	|
+   			   += EXPRESSION	|
+			   -  EXPRESSION	|
+			   -= EXPRESSION	|
+			   /  EXPRESSION	|
+			   /= EXPRESSION	|
+			   *  EXPRESSION	|
+			   *= EXPRESSION	|
+			   ε
+
+FUN_ARGS  ::= EXPR FUN_ARGS2	|
+			  CLOSURE FUN_ARGS2	|
+			  ε
+FUN_ARGS2 ::= , FUN_ARGS | ε
+
+NUM ::= INT | FLOAT | DOUBLE
+
+INT  ::= 0 INT2 | 1 INT2 | 2 INT2 | 3 INT2 | 4 INT2 | 5 INT2 | 6 INT2 | 7 INT2 | 8 INT2 | 9 INT2
+INT2 ::= 0 INT | 1 INT  | 2 INT  | 3 INT  | 4 INT  | 5 INT  | 6 INT  | 7 INT  | 8 INT  | 9 INT  | ε
+
+FLOAT  ::= INT FLOAT2 | FLOAT3
+FLOAT2 ::= .INT f | .f | ε
+FLOAT3 ::= .INT f
+
+DOUBLE  ::= INT DOUBLE2 | DOUBLE3
+DOUBLE2 ::= . INT | ε
+DOUBLE3 ::= . INT
+
+STRING ::= "STRING2"
+STRING2 ::= CHAR STRING2 | ε
+
+CHAR ::= 'a' | .. | 'z' | 'A' | .. | 'Z' | '0' | .. | '9' | ..
