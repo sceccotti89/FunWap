@@ -14,7 +14,7 @@ namespace Funwap.main
         public static void Main( String[] argv )
         {
             if(argv.Length == 0) {
-                throw new Exception( "Missing the source file.\nUsage: Main file_path.funwap" );
+                throw new Exception( "Missing the source file.\nUsage: Launcher file_path.funwap" );
             }
             
             String file_path = argv[0];
