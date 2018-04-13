@@ -1,4 +1,4 @@
-﻿/**
+/**
 * @author Stefano Ceccotti
 */
 
@@ -18,16 +18,13 @@ namespace Funwap.main
             }
             
             String file_path = argv[0];
-
-            float f = 033.3f;
-            f = float.Parse("33.3");
-
+            
             // Parse the code.
             Parser p = new Parser( new Tokenizer( file_path ) );
-
+            
             // Compile the code.
             Compiler c = new Compiler( file_path );
             c.compile( p.parse() );
-	    }
+	}
     }
 }
